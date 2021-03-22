@@ -1,0 +1,112 @@
+\section{Theoretical Analysis}
+\label{sec:analysis}
+%%<---- Nodal Analysis 
+\subsection{Nodal analysis}
+In this section, we begin by applying Kirchoff's current law (along with Ohm's law) to the nodes, considering the currents specified earlier. The following equations were obtained,
+\begin{align}
+\centering
+    &\frac{V_3}{R_3} + \frac{V_3 - V_2}{R_1} = \frac{V_4 - V_3}{R_2}\\
+    &\frac{V_4 - V_3}{R_2} = K_bV_3\\
+    &I_d = \frac{V_5}{R_5} + K_b\,V_3\\
+    &\frac{V_1-V_7}{R_6}=\frac{V_7-V_6}{R_7}\\
+    &\frac{V_3-V_2}{R_1} = \frac{V_1}{R_4} + \frac{V_1 - V_7}{R_6}\\
+    &V_2-V_1=V_A\\
+    &V_6 = -K_c\frac{V_1-V_7}{R_6}
+    \label{eq:KCL}
+\end{align}
+Or, in matrix form
+
+\begin{equation}
+\begin{pmatrix}
+0& \frac{-1}{R_1} & \frac{1}{R_3} +\frac{1}{R_1} + \frac{1}{R_2} & \frac{-1}{R_2} & 0 & 0 & 0\\
+0& 0 & \frac{-1}{R_2} - K_b & \frac{1}{R_2} & 0 & 0 & 0\\
+0& 0 & K_b & 0 & \frac{1}{R_5} & 0 & 0\\
+\frac{1}{R_6} & 0 & 0 & 0 & 0 & \frac{1}{R_7} & \frac{-1}{R_6} - \frac{1}{R_7}\\
+\frac{1}{R_4} + \frac{1}{R_6}& \frac{1}{R1} & \frac{-1}{R1} & 0 & 0 & 0 &\frac{-1}{R_6}\\
+-1 & 1 & 0 & 0 & 0 & 0 & 0\\
+\frac{K_c}{R_6} & 0 & 0 & 0 & 0 & 1 & -\frac{K_c}{R_6}\\
+\end{pmatrix}
+\begin{pmatrix}
+V_1\\
+V_2\\
+V_3\\
+V_4\\
+V_5\\
+V_6\\
+V_7\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+0\\
+0\\
+I_d\\
+0\\
+0\\
+V_A\\
+0\\
+\end{pmatrix}
+\label{eq:MatrixKCL}
+\end{equation}
+
+Where the last two equations are voltage equations for the voltage sources. 
+
+Solving this equation on Octave, we get:
+
+\input{../mat/VecSolNode.tex}
+
+where $V$ is the voltage with the node voltages in Volts. 
+
+%%<---- Mesh Analysis 
+\subsection{Mesh Analysis}
+\begin{align}
+\centering
+    &R_1I_A-R_3(I_B-I_A)+R_4(I_A-I_C)+V_A=0\\
+    &-R_4(I_A-I_C)+R_6I_C+R_7I_C-K_CI_C=0\\
+    &I_B=K_bR_3(I_A+I_B)
+    \label{eq:KVL}
+\end{align}
+
+
+Again, in matrix form and subsequently solving in octave we get, 
+\begin{equation}
+\begin{pmatrix}
+R_1 + R_3 + R_4 & -R_3 & -R_4\\
+-R_4 & 0 & R_4 + R_6 + R_7 - K_C\\
+-K_bR_3 & K_bR_3 - 1 & 0\\
+
+\end{pmatrix}
+\begin{pmatrix}
+I_A\\
+I_B\\
+I_C\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+-V_A\\
+0\\
+0\\
+\end{pmatrix}
+\label{eq:MatrixKVL}
+\end{equation}
+
+\input{../mat/VecSolMesh}
+
+
+The mesh analysis produced three currents\footnote{It should be noted that these values are in miliAmperes.}. The remainder three currents can be calculated by summing $I_A\, I_B\, I_C$ accordingly to ~\ref{eq:KVL} . 
+
+\begin{align}
+\centering
+ 	I_{R_3} &=  I_B-I_A\\
+ 	I_{R_4} &= I_A - I_C\\
+ 	I_{R_5} &= I_D - I_B
+    \label{eq:RCurrents}
+\end{align}
+
+hence, 
+\input{../mat/RCurrents.tex}
+
+
+
+
+
+
