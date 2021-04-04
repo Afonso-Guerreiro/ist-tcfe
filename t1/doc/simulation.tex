@@ -16,8 +16,8 @@ We ran a simulation of the circuit using {\it Ngspice} thus obtaining the follow
     Volt.}
   \label{tab:op}
 \end{table}
-Table ~\ref{tab:op} presents the voltage mesured at four nodes, while there are only seven non-0V in the circuit. This is a result of {\it Ngspice} requiring a voltage source in order to mesure the voltage for a voltage dependent source, as $I_b$. Naturally, this extra voltage source was set to zero volts, hence acting only as shunt. As one can see the voltage between v(7) and v(8) are the same, this was where the extra source was connected. 
-As one can see, the voltage at the nodes matches the nodal analysis, and the currents match the mesh analysis, (given the approximations done by {\it Ngspice} of its output) as expected. 
+Table ~\ref{tab:op} presents the voltage mesured at eight nodes, while there are only seven non-0V in the circuit. This is a result of {\it Ngspice} requiring a voltage source in order to mesure the voltage for a voltage dependent source, as $I_b$. Naturally, this extra voltage source was set to zero volts, hence acting only as shunt. As one can see the voltage between v(7) and v(8) are the same, this was where the extra source was connected. 
+The voltage at the nodes matches the nodal analysis, and the currents match the mesh analysis, (given the approximations done by {\it Ngspice} of its output) as expected. 
 
 
 
