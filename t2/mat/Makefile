@@ -6,6 +6,6 @@ octave.log: rc.m
 clean:
 	@rm -f octave.log octave-workspace *.eps *~
 	@rm -f *.tex
-	@rm -f *.txt
+	@rm -f *.txt *.pdf
 
 .PHONY: clean
